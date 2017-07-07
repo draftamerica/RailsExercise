@@ -1,0 +1,9 @@
+<h1>Welcome home</h1>
+
+<div>New Post</div>
+
+<%= form_with url: "/new_user_post", method: "post" do |form| %>
+    <div><%= label :title, "title" %><%= form.text_field :title %></div>
+    <div><%= label :content, "content" %><%= form.text_field :content %></div>
+    <div><%= form.submit "Submit" %></div>
+<% end %>
