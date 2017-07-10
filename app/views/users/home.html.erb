@@ -3,6 +3,8 @@
 <h2>Please click on the Login_form link, so you can Login and write an awesome blog post!</h2>
 <h3>(FYI, you can try to post without logging in, but we won't like that, and won't let you)</h3>
 
+<%= link_to 'Address', new_user_address_path(@user) %>
+
 <div>New Post</div>
 
 <%= form_with url: "/new_user_post", method: "post" do |form| %>

@@ -22,8 +22,20 @@
               <%= form.text_field :password, id: "password", class: "data-value" %>
           </div>
           <div class="data">
+              <%= label :password_confirmation, "password_confirmation", id: "password_confirmation", class: "data-label" %>
+              <%= form.text_field :password_confirmation, id: "password_confirmation", class: "data-value" %>
+          </div>
+          <div class="data">
               <%= form.submit %>
           </div>
       </div>
   <% end %>
+<% end %>
+
+<% if @user.errors.full_messages.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |error_message| %>
+      <li><%= error_message %></li> <br />
+    <% end %>
+  </ul>
 <% end %>

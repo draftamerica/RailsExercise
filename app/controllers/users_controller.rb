@@ -9,7 +9,9 @@ class UsersController < ApplicationController
   def home
       puts "\n****** home ******"
       @users = User.all
-      @user =  User.find_by_id(session[:user_id])
+      @user =  User.find(session[:user_id])
+      puts "\n****** @user.inspect, #{@user.inspect} ******"
+      @address = Address.new
       @post = Post.new
   end
 
@@ -123,6 +125,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
     puts "***** user_params *****"
-    params.require(:user).permit(:firstname, :lastname, :email, :username, :password)
+    params.require(:user).permit(:firstname, :lastname, :email, :username, :password, :password_confirmation)
     end
 end
