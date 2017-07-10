@@ -33,7 +33,7 @@ class AddressesController < ApplicationController
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to @address, notice: 'Address was successfully created.' }
+        format.html { redirect_to "/users", notice: 'Address was successfully created.' }
       else
         format.html { render :new }
       end
@@ -70,6 +70,6 @@ class AddressesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params
-      params.require(:address).permit(:street, :city, :state, :zip)
+      params.require(:address).permit(:user_id, :street, :city, :state, :zip)
     end
 end

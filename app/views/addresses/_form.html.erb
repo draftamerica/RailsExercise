@@ -31,6 +31,8 @@
        <%= form.text_area :zip, id: :zip_id %>
     </div>
 
+    <input type="hidden" name="address[user_id]" value="<%= @user.id %>">
+
     <div class="actions">
       <%= form.submit %>
   </div>

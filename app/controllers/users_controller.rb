@@ -9,10 +9,14 @@ class UsersController < ApplicationController
   def home
       puts "\n****** home ******"
       @users = User.all
-      @user =  User.find(session[:user_id])
-      puts "\n****** @user.inspect, #{@user.inspect} ******"
-      @address = Address.new
-      @post = Post.new
+      if session[:user_id]
+          @user =  User.find(session[:user_id])
+          @address = Address.new
+          @post = Post.new
+      else
+          puts "\n****** @user.inspect, #{@user.inspect} ******"
+          redirect_to "/login_form"
+      end
   end
 
   def edit
