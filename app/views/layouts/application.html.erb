@@ -11,7 +11,15 @@
   <body>
       <%= link_to "Home", "/" %> <br>
       <%= link_to "Index", "/users" %>
-      <%= link_to "New", new_user_path %>
+      <% if logged_in? %>
+          <%= link_to "logout", "/logout" %>
+      <% else %>
+          <%= link_to "New", new_user_path %>
+          <%= link_to "Login_form", "/login_form" %>
+      <% end %>
+      <%= link_to "Comments", "/comments" %>
+
+      <p id="notice"><%= notice %></p>
     <%= yield %>
   </body>
 </html>

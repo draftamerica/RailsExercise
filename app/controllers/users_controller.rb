@@ -9,9 +9,47 @@ class UsersController < ApplicationController
   def home
       puts "\n****** home ******"
       @users = User.all
-      @user =  User.find(3)
+      @user =  User.find_by_id(session[:user_id])
       @post = Post.new
   end
+
+  def edit
+	@post = Post.find(params[:id])		# get the post for which the comment is created
+	@comment = Comment.new					# generate a new comment object to hold submitted data
+  end
+
+  def login_form
+      puts "\n****** login_form ******"
+  end
+
+    def login
+          puts "\n******* login *******"
+          @user = User.where(username: params[:username]).first
+          if @user
+              if @user.password == params[:password]
+                    session[:user_id] = @user.id
+                    #puts "asdf  mfhds #{@current_user.inspect}"
+              @current_user = User.find_by_id(@user.id)
+              puts "\n******* login successful *******"
+              puts "\ncurrent_user: #{@current_user.inspect}"
+                  flash[:notice] = "You've been signed in successfully."
+                  redirect_to '/home'
+              else
+                  flash[:notice] = "Please check your password and try again."
+                  redirect_to "/login_form"
+              end
+          else
+              flash[:notice] = "Please check your username and try again."
+              redirect_to "/login_form"
+          end
+      end
+
+    def logout
+        session.delete(:user_id)
+        flash[:notice] = "You've been signed out successfully."
+        redirect_to root_url
+    end
+
 
   # GET /users
   # GET /users.json
@@ -24,6 +62,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+      @posts = @user.posts
   end
 
   # GET /users/new
